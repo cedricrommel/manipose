@@ -1,0 +1,46 @@
+hydra:
+  job:
+    chdir: True
+run:
+  train: True
+  test: True
+  experiment: default
+  mlflow_on: False
+  mlflow_uri: /path/to/mlflow/db
+  seed: 42
+  cudnn_benchmark: False
+  set_deterministic: True
+  checkpoint: default
+train:
+  epochs: 200
+  workers: 2
+  optim: adam
+  lr: 1e-3
+  lr_scheduler: True
+  lr_min: 0.
+  lr_patience: 10
+  lr_threshold: 1e-4
+  batch_size: 100
+model:
+  layers: 2
+  hidden_features: 32
+  arch: mlp
+  act: tanh
+  beta: 0.1  # only used by rMCL
+diffusion:
+  enabled: False
+  conditioning: raw
+  cond_mix_mode: concat
+  beta_start: 0.0001
+  beta_end: 0.5
+  num_steps: 50
+  schedule: cosine
+multi_hyp:
+  nsamples: 5
+  agg_strategy: average
+data:
+  scenario: easy
+  n_train: 1000
+  n_val: 1000
+  n_test: 1000
+  radius: 1

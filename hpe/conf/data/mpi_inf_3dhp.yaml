@@ -1,0 +1,7 @@
+pad: 0
+out_all: True
+seq_len: 27
+keypoints: gt
+dataset: 3dhp
+data_dir: /path/to/3dhp/data/
+downsample: 1

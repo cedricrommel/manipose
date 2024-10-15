@@ -1,0 +1,9 @@
+epochs: 50
+workers: 2
+optim: adam
+lr: 1e-3
+lr_scheduler: True
+lr_min: 0.
+lr_patience: 10
+lr_threshold: 1e-4
+batch_size: 100
