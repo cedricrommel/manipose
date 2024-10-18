@@ -189,7 +189,7 @@ You should find the corresponding figures in the `./figures` folder:
 
 Table 1 can also be reproduced in ~2 minutes using the following command:
 ```bash
-bash toy_experiment/quantitative_comparison.sh
+bash toy_experiment/quantitative_comparison_toy2d.sh
 ```
 
 # Acknowledgments
