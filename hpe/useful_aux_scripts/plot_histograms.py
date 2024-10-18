@@ -41,7 +41,8 @@ PAGE_WIDTH = 6.875
 FONTSIZE = 10
 
 def setup_style(grid=False, column_fig=False, fontsize=FONTSIZE):
-    plt.style.use("seaborn-paper")
+    # plt.style.use("seaborn-paper")
+    plt.style.use("seaborn-v0_8")
 
     if column_fig:
         plt.rcParams["figure.figsize"] = (TEXT_WIDTH, TEXT_WIDTH / 2)
