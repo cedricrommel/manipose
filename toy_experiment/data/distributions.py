@@ -306,9 +306,14 @@ class LiftingDist2Dto3D(BivariateVonMisesMixture):
         for c, mu, kappa in zip(self.components, self.modes, self.dispersions):
             self.dist_list.append(BivariateVonMises(phi_loc=mu[0], psi_loc=mu[1],phi_concentration=kappa[0],psi_concentration=kappa[1],correlation=0.))
 
-    def sample(self, size: int) -> Tuple[np.array, np.array]:
+    def sample(self, size: int, output_components=False) -> Tuple[np.array, np.array]:
         angles = super().sample(size)
         cartesian_points = self.torusanglestocartesian(major_radius=self.major_radius,minor_radius=self.minor_radius,angles=angles)
         assert np.shape(np.stack((cartesian_points[:,0],cartesian_points[:,2]),axis=-1)) == (size,2)
         assert np.shape(cartesian_points) == (size,3)
-        return np.stack((cartesian_points[:,0],cartesian_points[:,2]),axis=-1), cartesian_points
+
+        if output_components is True:
+            return np.stack((cartesian_points[:,0],cartesian_points[:,2]),axis=-1), cartesian_points, self.picked_components
+        
+        else : 
+            return np.stack((cartesian_points[:,0],cartesian_points[:,2]),axis=-1), cartesian_points

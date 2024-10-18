@@ -1,5 +1,5 @@
 <div align="center">
-<h1> ManiPose: Manifold-Constrained Multi-Hypothesis 3D Human Pose Estimation </h1>
+<h1> ManiPose: Manifold-Constrained Multi-Hypothesis 3D Human Pose Estimation (NeurIPS 2024) </h1>
 <h3> Cédric Rommel, Victor Letzelter, Nermin Samet, Renaud Marlet, Matthieu Cord, Patrick Pérez, Eduardo Valle
 </h3>
 <!-- <h4> <i> International Conference on Computer Vision (ICCV), <br> Workshop Analysis and Modeling of Faces and Gestures, 2023 </i></h4> -->
@@ -177,7 +177,7 @@ python main_3dhp.py \
     train.batch_size_test=30
 ``` -->
 
-# 1D-to-2D toy experiment
+# toy experiments
 
 Figure 4 can be reproduced in ~2 minutes using a ~10GB GPU. Just run the following command:
 ```bash
@@ -187,9 +187,19 @@ cd toy_experiment ; python plotting_script.py
 You should find the corresponding figures in the `./figures` folder:
 <p align="center"> <img src="./assets/single_toy_picture_column_v2.png" width="80%"> </p>
 
-Table 1 can also be reproduced in ~2 minutes using the following command:
+Table 1 can be reproduced using the following command:
 ```bash
 bash toy_experiment/quantitative_comparison_toy2d.sh
+```
+
+The Figure 8 from 2D-to-3D toy experiment can be reprocuced and saved in `toy_experiment/images` by running
+```python toy_experiment/toy-plot.py
+python 
+``` 
+
+Table 6 can also be reproced using the command:
+```bash
+bash toy_experiment/quantitative_comparison_toy3d.sh
 ```
 
 # Acknowledgments
