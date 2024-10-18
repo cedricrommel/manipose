@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
 
+from logging import warning
 import hydra
+import mlflow as mlf
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -15,7 +17,10 @@ from training import Trainer, calc_mpjpe, distance_to_circle
 from utils.plot_utils import plot_predictions, plot_training_curve
 from utils.utils import (log_params_from_omegaconf_dict,
                          save_and_log_np_artifact, set_random_seeds)
+import rootutils
 
+rootutils.setup_root(__file__, indicator=".project-root", project_root_env_var=True, pythonpath=True)
+# The above line allows the script to find the project root directory, and to set the PROJECT_ROOT environment variable
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def main(cfg: DictConfig):
@@ -198,6 +203,11 @@ def main(cfg: DictConfig):
             mlf.log_metric(key="test_mpjpe", value=test_mpjpe)
             mlf.log_metric(key="val_dtc", value=val_dtc)
             mlf.log_metric(key="test_dtc", value=test_dtc)
+
+            warning("val_mpjpe : " + str(val_mpjpe) + "\n" +
+                    "test_mpjpe : " + str(test_mpjpe) + "\n" +
+                    "val_dtc : " + str(val_dtc) + "\n" +
+                    "test_dtc : " + str(test_dtc) + "\n")
 
             # save and log predictions
             save_and_log_np_artifact(

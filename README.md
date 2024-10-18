@@ -181,7 +181,7 @@ python main_3dhp.py \
 
 Figure 4 can be reproduced in ~2 minutes using a ~10GB GPU. Just run the following command:
 ```bash
-python toy_experiment/plotting_script.py
+cd toy_experiment ; python plotting_script.py
 ```
 
 You should find the corresponding figures in the `./figures` folder:

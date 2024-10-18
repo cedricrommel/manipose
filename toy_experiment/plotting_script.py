@@ -3,6 +3,7 @@ import pickle
 from collections import OrderedDict
 from copy import deepcopy
 from typing import Optional
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -31,7 +32,6 @@ METHODS_NAMES = {
     "mlp": "Unconstr. MLP",
     "constrained": "Constr. MLP",
     "constrained_rmcl": "ManiPose",
-    # "constrained_rmcl": "MHMC",
 }
 
 reg_cpal = sns.color_palette()
@@ -49,7 +49,7 @@ METHODS_COLORS = {
     "constrained_rmcl": MANI_COL,
 }
 
-# %% CVPR PAGE SIZES
+# %% PAGE SIZES
 TEXT_WIDTH = 3.25
 PAGE_WIDTH = 6.875
 FONTSIZE = 10
@@ -75,6 +75,19 @@ hard2_distribution = HardBimodalDist(
 
 # %% - PLOT SETTING
 
+# Get the directory where the script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+print(script_dir)
+
+# Construct the full path to the "figures" directory
+figures_dir = os.path.join(script_dir, "figures")
+
+print(figures_dir)
+
+# Check if the "figures" directory exists, and if not, create it
+if not os.path.exists(figures_dir):
+    os.mkdir(figures_dir)
 
 def plot_setting(
     radius=1.0,
@@ -755,16 +768,6 @@ plot_oracle_and_pred(
     save_path="./figures/oracles_and_preds_regression.pdf",
 )
 
-# plot_oracle_and_pred(
-#     distribution=hard2_distribution,
-#     query=query_input,
-#     euclidean_oracle=euclidean_oracle_output,
-#     riemanian_oracle=manifold_oracle_output,
-#     models=trained_models,
-#     inputs_offset=offset,
-#     # save_path="./figures/oracles_and_preds_regression.pdf",
-# )
-
 # %%
 
 rmcl_h2_tr_conf = OmegaConf.load("./conf/train/rmcl_constrained_hard2.yaml")
@@ -798,6 +801,8 @@ ax = plot_oracle_and_pred(
     inputs_offset=1.5,
     # save_path="./figures/oracles_and_preds_regression_2.pdf",
     save_path=None,
+    accept_outputs=acceptable_outputs,
+    acc_outputs_probs=acceptable_outputs_probs,
 )
 
 
@@ -914,7 +919,8 @@ def plot_hyps(hyps_per_model, ax):
 
 
 def setup_style(grid=False, column_fig=False, fontsize=FONTSIZE):
-    plt.style.use("seaborn-paper")
+    # plt.style.use("seaborn-paper")
+    plt.style.use("seaborn-v0_8")
 
     if column_fig:
         plt.rcParams["figure.figsize"] = (TEXT_WIDTH, TEXT_WIDTH / 2)
@@ -1242,8 +1248,8 @@ def plot_single_figure(data_dict, save_path, col=True):
 # x add theta
 # x adapt to 1,4 format as well
 
-path_2_2 = "./figures/single_toy_picture_column.pdf"
+path_2_2 = os.path.join(figures_dir, "single_toy_picture_column.pdf")
 plot_single_figure(data_dict, path_2_2)
-path_2_2 = "./figures/single_toy_picture_column.png"
+path_2_2 = os.path.join(figures_dir, "single_toy_picture_column.png")
 plot_single_figure(data_dict, path_2_2)
 # %%

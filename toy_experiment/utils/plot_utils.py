@@ -25,7 +25,8 @@ FONTSIZE = 8
 
 
 def setup_style(grid=False, column_fig=False):
-    plt.style.use("seaborn-paper")
+    # plt.style.use("seaborn-paper")
+    plt.style.use("seaborn-v0_8")
 
     if column_fig:
         plt.rcParams["figure.figsize"] = (COL_WIDTH_IN, COL_WIDTH_IN / 2)

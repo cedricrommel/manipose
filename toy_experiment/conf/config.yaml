@@ -1,16 +1,19 @@
-hydra:
-  job:
-    chdir: True
 run:
   train: True
   test: True
   experiment: default
   mlflow_on: False
-  mlflow_uri: /path/to/mlflow/db
+  mlflow_uri: ${oc.env:PROJECT_ROOT}/toy_experiment/mlruns
   seed: 42
   cudnn_benchmark: False
   set_deterministic: True
   checkpoint: default
+  name: None
+hydra:
+  job:
+    chdir: True
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${run.name}_${now:%H-%M-%S}
 train:
   epochs: 200
   workers: 2

@@ -8,14 +8,15 @@ from mh_so3_hpe.data.camera import camera_to_world, image_coordinates
 from mh_so3_hpe.data.generators import PoseSequenceGenerator
 
 
-# CVPR PAGE SIZES
+# PAGE SIZES
 TEXT_WIDTH = 3.25
 PAGE_WIDTH = 6.875
 FONTSIZE = 10
 
 
 def setup_style(grid=False, column_fig=False, fontsize=FONTSIZE, lw=1.0):
-    plt.style.use("seaborn-paper")
+    # plt.style.use("seaborn-paper")
+    plt.style.use("seaborn-v0_8")
 
     if column_fig:
         plt.rcParams["figure.figsize"] = (TEXT_WIDTH, TEXT_WIDTH / 2)

@@ -142,3 +142,10 @@ settings.json
 
 # muP shape files
 **/base_shapes/*
+
+# MLFLow folders
+toy_experiment/mlruns/
+toy_experiment/mlflow/
+
+# Notebooks
+extract_metrics.py
