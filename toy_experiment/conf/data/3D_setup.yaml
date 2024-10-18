@@ -1,0 +1,6 @@
+scenario: 'torus-2Dto3D'
+n_train: 20000
+n_val: 2000
+n_test: 2000
+major_radius: 2
+minor_radius: 1

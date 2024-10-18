@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# declare -a seeds=(42 43 44 45 46)
-declare -a seeds=(45 46)
+declare -a seeds=(42 43 44 45 46)
 
 for seed in "${seeds[@]}"
 do
