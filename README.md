@@ -36,7 +36,7 @@ pip install mlflow
 The [Human3.6M](http://vision.imar.ro/human3.6m/description.php) dataset was set following the [AnyGCN](https://github.com/tamasino52/Any-GCN#benchmark-setup) repository.
 Please refer to it to set it up.
 
-The MPI-INF-3DHP data can be obtained from the [official website](https://vcai.mpi-inf.mpg.de/3dhp-dataset/) or, alternatively, using the [MMPose library](https://github.com/open-mmlab/mmpose/blob/6d10b2ec81da7e252016b3154c7fdb46c403ecd8/tools/dataset_converters/preprocess_mpi_inf_3dhp.py#L190). **(TO CHECK WITH NERMIN)**
+The MPI-INF-3DHP data can be obtained from the [official website](https://vcai.mpi-inf.mpg.de/3dhp-dataset/) or, alternatively, using the [MMPose library](https://github.com/open-mmlab/mmpose/blob/6d10b2ec81da7e252016b3154c7fdb46c403ecd8/tools/dataset_converters/preprocess_mpi_inf_3dhp.py#L190).
 
 Consider adding the path to where the data is stored to the `data.data_dir` field in the `conf/config.yaml` file. Alternatively, this information can also be passed directly to the training/test command line if preferred, as explained below.
 
@@ -50,23 +50,6 @@ You can download checkpoints of pretrained models from the assets of the last co
 Once checkpoints and data are correctly downloaded and moved to their correct locations, you can evaluate the models by simply running the commands below:
 
 ### Human 3.6M
-<!-- ```bash
-python main_h36m_lifting.py \
-    +data=lifting_cpn17_test_seq243 \
-    run.experiment=reeval_best_rmcl_cpn_243 \
-    run.viz=True \
-    model.arch=rmcl_manifold \
-    model.mup=False \
-    multi_hyp.n_hyp=5 \
-    train.rmcl_score_reg=0.5 \
-    train.batch_size=3 \
-    train.batch_size_test=10 \
-    train.lr=4e-5 \
-    model.rot_dim=6 \
-    run.checkpoint_model=/home/crommel/shared/crommel/mlflow_files/mlruns/588654481840722575/70c770845f4f4542990cc7e22b00b5f5/artifacts/model_best_mpjpe.pth \
-    run.train=False \
-    run.test=True
-``` -->
 ```bash
 python hpe/main_h36m_lifting.py \
     run.checkpoint_model=hpe/checkpoints/manipose_h36m.pth \
@@ -91,23 +74,6 @@ Note that you can omit the `data.data_dir` part of the command if you filled the
 
 # Visualization
 Given a pre-trained model checkpoint, you can visualize the predicted poses using the script `viz.py`. For example:
-<!-- ```bash
-python viz.py data.data_dir=/PATH/TO/H36M/DATA/ eval.model_l=pre-trained-models/diff_model_ckpts/diffhpe-wrapper viz.viz_limit=600
-``` -->
-<!-- ```bash
-python viz.py \
-    model.arch=\'mixste,rmcl_manifold\' \
-    run.checkpoint_model=\'/home/crommel/shared/crommel/mlflow_files/mlruns/951869235231703365/e0b2027ecc6a49418ea19344bbd6194d/artifacts/model_best_mpjpe.pth,/home/crommel//shared/crommel/pre-trained-models/mh_so3_hpe/best_rmcl_model_27f_5hyps/model_best_mpjpe.pth\' \
-    +data=lifting_cpn17_test_seq27 \
-    +model=small \
-    model.mup=False \
-    run.train=False \
-    train.batch_size_test=10 \
-    multi_hyp.n_hyp=5 \
-    viz.viz_video=/home/crommel/shared/crommel/h36m_data/videos/S11/Videos/Greeting.54138969.mp4 \
-    viz.viz_action=greeting \
-    viz.viz_subject=S11 \
-``` -->
 ```bash
 python viz.py \
     run.checkpoint_model=hpe/checkpoints/manipose_h36m.pth \
@@ -128,23 +94,6 @@ Other visualization configurations can be changed within the `viz` field, in `co
 
 ### Human 3.6M
 To train ManiPose from scratch on H36M, run:
-<!-- python main_h36m_lifting.py data.data_dir=/PATH/TO/H36M/DATA/ +train=diffhpe-2d +diffusion=diffhpe-2d -->
-<!-- ```bash
-python main_h36m_lifting.py \
-    +data=lifting_cpn17_test_seq243 \
-    run.experiment=reeval_best_rmcl_cpn_243 \
-    run.viz=True \
-    model.arch=rmcl_manifold \
-    model.mup=False \
-    multi_hyp.n_hyp=5 \
-    train.rmcl_score_reg=0.1 \
-    train.batch_size=3 \
-    train.batch_size_test=10 \
-    train.lr=4e-5 \
-    model.rot_dim=6 \
-    run.train=True \
-    run.test=True
-``` -->
 ```bash
 python hpe/main_h36m_lifting.py \
     run.train=True \
@@ -163,19 +112,6 @@ python hpe/main_3dhp.py \
     train.batch_size_test=30 \
     data.data_dir=/PATH/TO/MPI/DATA/
 ```
-<!-- ```bash
-python main_3dhp.py \
-    +data=mpi_inf_3dhp \
-    run.experiment=mpi_inf_3dhp_fixed \
-    run.viz=True \
-    model.mup=False \
-    model.arch=rmcl_manifold \
-    multi_hyp.n_hyp=5 \
-    train.rmcl_score_reg=0.1 \
-    model.rot_dim=6 \
-    train.batch_size=30 \
-    train.batch_size_test=30
-``` -->
 
 # toy experiments
 
@@ -194,8 +130,8 @@ bash toy_experiment/quantitative_comparison_toy2d.sh
 
 The Figure 8 from 2D-to-3D toy experiment can be reprocuced and saved in `toy_experiment/images` by running
 ```python toy_experiment/toy-plot.py
-python 
-``` 
+python
+```
 
 Table 6 can also be reproced using the command:
 ```bash
